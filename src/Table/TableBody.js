@@ -216,7 +216,7 @@ export default {
             ? this.table.$scopedSlots[column.template]({ row, rowIndex, column, columnIndex })
             : '';
         }
-        return <div
+        return <span
           class={ `${this.prefixCls}--level-${row._level}-cell` }
           style={{
             marginLeft: `${(row._level - 1) * 24}px`,
@@ -228,7 +228,7 @@ export default {
                 on-click={ $event => this.handleEvent($event, 'icon', { row, rowIndex, column, columnIndex }, { isFold: row._isFold }) }></i>
             }
           {cellVal}
-        </div>;
+        </span>;
       }
       // TreeType children's index
       if (this.table.showIndex && this.table.treeType && column.prop === '_normalIndex' && row._level > 1) {
