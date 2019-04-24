@@ -210,7 +210,13 @@ export default {
       }
       // Tree's firstProp
       if (this.table.treeType && this.table.firstProp === column.prop) {
-        return <span
+        let cellVal = row[column.prop] ? row[column.prop] : '';
+        if (column.type === 'template') {
+          cellVal = this.table.$scopedSlots[column.template]
+            ? this.table.$scopedSlots[column.template]({ row, rowIndex, column, columnIndex })
+            : '';
+        }
+        return <div
           class={ `${this.prefixCls}--level-${row._level}-cell` }
           style={{
             marginLeft: `${(row._level - 1) * 24}px`,
@@ -221,8 +227,8 @@ export default {
                 class={ `${this.prefixCls}--tree-icon zk-icon zk-icon-${row._isFold ? 'plus' : 'minus'}-square-o`}
                 on-click={ $event => this.handleEvent($event, 'icon', { row, rowIndex, column, columnIndex }, { isFold: row._isFold }) }></i>
             }
-            { row[column.prop] ? row[column.prop] : '' }
-        </span>;
+          {cellVal}
+        </div>;
       }
       // TreeType children's index
       if (this.table.showIndex && this.table.treeType && column.prop === '_normalIndex' && row._level > 1) {

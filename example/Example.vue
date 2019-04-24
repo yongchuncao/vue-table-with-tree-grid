@@ -22,6 +22,9 @@
       :is-fold="props.isFold"
       :expand-type="props.expandType"
       :selection-type="props.selectionType">
+      <template slot="name" scope="scope">
+        {{ `My name is ${scope.row.name}`}}
+      </template>
       <template slot="$expand" scope="scope">
         {{ `My name is ${scope.row.name},
            this rowIndex is ${scope.rowIndex}.`
@@ -199,6 +202,8 @@
             label: 'name',
             prop: 'name',
             width: '400px',
+            type: 'template',
+            template: 'name',
           },
           {
             label: 'sex',

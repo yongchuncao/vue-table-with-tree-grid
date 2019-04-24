@@ -1,4 +1,5 @@
 # vue-table-with-tree-grid
+在[MisterTaki/vue-table-with-tree-grid](https://github.com/MisterTaki/vue-table-with-tree-grid.git)的基础上，增加首列支持template定制样式。
 
 > A table (with tree-grid) component for Vue.js 2.0. (Its style extends [@iView](https://github.com/iview/iview))
 
