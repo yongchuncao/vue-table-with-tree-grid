@@ -54,7 +54,7 @@
         _isChecked: false,
         _level: level,
         _isHide: isFold ? level !== 1 : false,
-        _isFold: isFold,
+        _isFold: isFold || row.isFold,
         _childrenLen: childrenLen,
         _normalIndex: index + 1,
         ...row,
