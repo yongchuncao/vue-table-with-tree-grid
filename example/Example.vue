@@ -27,8 +27,8 @@
       </template>
       <template slot="$expand" scope="scope">
         {{ `My name is ${scope.row.name},
-           this rowIndex is ${scope.rowIndex}.`
-         }}
+        this rowIndex is ${scope.rowIndex}.`
+        }}
       </template>
       <template slot="likes" scope="scope">
         {{ scope.row.likes.join(',') }}
@@ -65,12 +65,14 @@
             sex: 'male',
             likes: ['football', 'basketball'],
             score: 10,
+            isFold: false,
             children: [
               {
                 name: 'Ashley',
                 sex: 'female',
                 likes: ['football', 'basketball'],
                 score: 20,
+                isFold: false,
                 children: [
                   {
                     name: 'Ashley',
@@ -226,14 +228,13 @@
     },
     computed: {
       propList() {
-        return Object.keys(this.props).map(item => ({
-          name: item,
-        }));
+        return Object.keys(this.props)
+          .map(item => ({
+            name: item,
+          }));
       },
     },
-    methods: {
-
-    },
+    methods: {},
   };
 </script>
 

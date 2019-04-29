@@ -43,25 +43,31 @@
   /* eslint-disable no-underscore-dangle */
   /* eslint-disable no-param-reassign */
 
-  function getBodyData(data, isTreeType, childrenProp, isFold, level = 1) {
+  function getBodyData(data, isTreeType, childrenProp, isFold, level = 1, isHide) {
     let bodyData = [];
     data.forEach((row, index) => {
       const children = row[childrenProp];
-      const childrenLen = Object.prototype.toString.call(children).slice(8, -1) === 'Array' ? children.length : 0;
+      const childrenLen = Object.prototype.toString.call(children)
+        .slice(8, -1) === 'Array' ? children.length : 0;
+      const fold = typeof row.isFold === 'undefined' ? isFold : row.isFold;
+      if (typeof isHide === 'undefined') {
+        isHide = fold ? level !== 1 : false;
+      }
       bodyData.push({
         _isHover: false,
         _isExpanded: false,
         _isChecked: false,
         _level: level,
-        _isHide: isFold ? level !== 1 : false,
-        _isFold: isFold || row.isFold,
+        _isHide: isHide,
+        _isFold: fold,
         _childrenLen: childrenLen,
         _normalIndex: index + 1,
         ...row,
       });
       if (isTreeType) {
         if (childrenLen > 0) {
-          bodyData = bodyData.concat(getBodyData(children, true, childrenProp, isFold, level + 1));
+          bodyData = bodyData.concat(getBodyData(children, true, childrenProp, isFold, level + 1,
+            fold));
         }
       }
     });
